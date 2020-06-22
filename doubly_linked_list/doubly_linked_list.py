@@ -8,7 +8,7 @@ class ListNode:
 
     """Wrap the given value in a ListNode and insert it
     after this node. Note that this node could already
-    have a next node it is point to."""
+    have a next node it is pointed to."""
     def insert_after(self, value):
         current_next = self.next
         self.next = ListNode(value, self, current_next)
@@ -48,19 +48,31 @@ class DoublyLinkedList:
     as the new head of the list. Don't forget to handle 
     the old head node's previous pointer accordingly."""
     def add_to_head(self, value):
-        pass
+        old_head = self.head
+        new_head = old_head.insert_before(value)
+        old_head.prev = new_head
+        self.head = new_head
+        return old_head
 
     """Removes the List's current head node, making the
     current head's next node the new head of the List.
     Returns the value of the removed Node."""
     def remove_from_head(self):
-        pass
+        old_head = self.head
+        new_head = self.head.next
+        old_head.next = None
+        new_head.prev = None
+        return old_head
 
     """Wraps the given value in a ListNode and inserts it 
     as the new tail of the list. Don't forget to handle 
     the old tail node's next pointer accordingly."""
     def add_to_tail(self, value):
-        pass
+        old_tail = self.tail
+        new_tail = old_tail.insert_after(value)
+        old_tail.next = new_tail
+        self.tail = new_tail
+        return old_tail
 
     """Removes the List's current tail node, making the 
     current tail's previous node the new tail of the List.
@@ -71,7 +83,8 @@ class DoublyLinkedList:
     """Removes the input node from its current spot in the 
     List and inserts it as the new head node of the List."""
     def move_to_front(self, node):
-        pass
+        node.delete()
+        self.head.insert_before(node.value)
 
     """Removes the input node from its current spot in the 
     List and inserts it as the new tail node of the List."""
@@ -81,8 +94,11 @@ class DoublyLinkedList:
     """Removes a node from the list and handles cases where
     the node was the head or the tail"""
     def delete(self, node):
-        pass
+        node.delete()
         
     """Returns the highest value currently in the list"""
     def get_max(self):
         pass
+
+# dll = DoublyLinkedList(ListNode(47, None, None))
+# print(dll.add_to_head(41))
