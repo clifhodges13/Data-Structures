@@ -30,27 +30,6 @@ class BSTNode:
                 self.right = BSTNode(value)
             else:
                 self.right.insert(value)
-        # if new value < self.value
-        # if value < cur_val:
-        #     # IF self.left is already taken by a node
-        #     if self.left is not None:
-        #         # make that (left) node, call insert
-        #         self.left.insert(value) 
-        #     # set the left to the new node with the new value
-        #     else:
-        #         self.left = new_node
-
-        # # if new value >= self.value
-        # elif value >= cur_val:
-        #     # IF self.right is already taken by a node
-        #     if self.right is not None:
-        #         # make that (right) node call insert
-        #         self.right.insert(value) 
-        #     # set the right child to the new node with new value
-        #     else:
-        #         self.right = new_node
-
-
 
     # Return True if the tree contains the value
     # False if it does not
@@ -118,13 +97,4 @@ class BSTNode:
     # Print Post-order recursive DFT
     def post_order_dft(self, node):
         pass
-
-
-new_bst = BSTNode(10)
-new_bst.insert(2)
-new_bst.insert(12)
-new_bst.insert(4)
-new_bst.insert(17)
-new_bst.insert(7)
-
-print('--- contains --- ',new_bst.contains(2))
+    
