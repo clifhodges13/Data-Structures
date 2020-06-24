@@ -55,7 +55,6 @@ class DoublyLinkedList:
                 length += 1
                 self.length = length
             return length
-        # return self.length
 
     def __str__(self):
         return f'the length of the DLL is {self.length}, head : {self.head.value}, tail: {self.tail.value}'

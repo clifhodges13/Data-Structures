@@ -57,46 +57,28 @@ class BSTNode:
     def contains(self, target):
         if self.value == target:
             return True
-        # compare the target to current value
-        # if current value < target
-        if self.value < target:
-            # check the left subtree (self.left.contains(target))
-            # if you cannot go left, return False
+        if self.value > target:
             if self.left is None:
                 return False
             found = self.left.contains(target)
-            print('--- found --- ',found)
 
-        # if current value >= target
-        elif self.value >= target:
-            # check if right subtree contains target
-            # if you cannot go right, return False
+        elif self.value <= target:
             if self.right is None:
                 return False
             found = self.right.contains(target)
-            print('--- found --- ',found)
-
         return found
 
     # Return the maximum value found in the tree
     def get_max(self):
-        # the largest value will always be to the right of the current node
-        # if we can go right, lets find the largest number there by calling get_max on the right subtree
-        if self.right is not None:
-            self.right.get_max()
-        # if we cannot go right, return the current value
-        else:
-            return self.value
-
-
-        # if self.right is None:
-        #     max_val = self.value
-        #     return max_val
-        # elif self.right is not None:
-        #     if self.right.right is None:
-        #         max_val = self.right.value
-        #     else:
-        #         self.right.get_max()
+        if self.right is None:
+            max_val = self.value
+            return max_val
+        elif self.right is not None:
+            if self.right.right is None:
+                max_val = self.right.value
+                return max_val
+            else:
+                return self.right.get_max()
     
     # Call the function `fn` on the value of each node
     def for_each(self, fn):
