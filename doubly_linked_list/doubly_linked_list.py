@@ -1,19 +1,19 @@
 """Each ListNode holds a reference to its previous node
 as well as its next node in the List."""
 class ListNode:
-    def __init__(self, value, prev=None, next_node=None):
+    def __init__(self, value, prev=None, next=None):
         self.value = value
         self.prev = prev
-        self.next_node = next_node
+        self.next = next
 
     """Wrap the given value in a ListNode and insert it
     after this node. Note that this node could already
     have a next node it is pointed to."""
     def insert_after(self, value):
-        current_next = self.next_node
-        self.next_node = ListNode(value, self, current_next)
+        current_next = self.next
+        self.next = ListNode(value, self, current_next)
         if current_next:
-            current_next.prev = self.next_node
+            current_next.prev = self.next
 
     """Wrap the given value in a ListNode and insert it
     before this node. Note that this node could already
@@ -22,16 +22,16 @@ class ListNode:
         current_prev = self.prev
         self.prev = ListNode(value, current_prev, self)
         if current_prev:
-            current_prev.next_node = self.prev
+            current_prev.next = self.prev
         return self.prev
 
     """Rearranges this ListNode's previous and next pointers
     accordingly, effectively deleting this ListNode."""
     def delete(self):
         if self.prev:
-            self.prev.next_node = self.next_node
-        if self.next_node:
-            self.next_node.prev = self.prev
+            self.prev.next = self.next
+        if self.next:
+            self.next.prev = self.prev
 
 
 """Our doubly-linked list class. It holds references to
@@ -45,14 +45,17 @@ class DoublyLinkedList:
     def __len__(self):
         if self.head is None and self.tail is None:
             self.length = 0
+            return self.length
         else:
             current_node = self.head
             length = 1
-            while current_node.next_node is not None:
-                current_node = current_node.next_node
+            while current_node.next is not None:
+                current_node = current_node.next
                 print(length)
+                length += 1
                 self.length = length
-        return self.length
+            return length
+        # return self.length
 
     def __str__(self):
         return f'the length of the DLL is {self.length}, head : {self.head.value}, tail: {self.tail.value}'
@@ -70,7 +73,7 @@ class DoublyLinkedList:
         else:
             old_head.prev = new_node
             self.head = new_node
-            new_node.next_node = old_head
+            new_node.next = old_head
 
     """Removes the List's current head node, making the
     current head's next node the new head of the List.
@@ -93,7 +96,7 @@ class DoublyLinkedList:
             self.head = new_node
             self.tail = new_node
         else:
-            old_tail.next_node = new_node
+            old_tail.next = new_node
             self.tail = new_node
             new_node.prev = old_tail
 
@@ -135,7 +138,7 @@ class DoublyLinkedList:
             self.head = None                
             self.tail = None
         elif self.head == node:
-            self.head = node.next_node        
+            self.head = node.next        
             node.delete()
         elif self.tail == node:
             self.tail = node.prev        
@@ -152,7 +155,7 @@ class DoublyLinkedList:
         while current:
             if current.value > max_val:
                 max_val = current.value
-            current = current.next_node
+            current = current.next
         return max_val
 
 # node1 = ListNode(47)
